@@ -1,6 +1,8 @@
 # JSON Form Builder Bundle
 
- Symfony integration for fjogeleit/json-form-builder
+![CodeChecks](https://github.com/fjogeleit/json-form-builder-bundle/workflows/CodeChecks/badge.svg?branch=master)
+
+ Symfony integration for [fjogeleit/json-form-builder](https://github.com/fjogeleit/json-form-builder)
  
  ## Features
  
