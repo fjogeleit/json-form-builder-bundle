@@ -1,0 +1,13 @@
+name: CodeChecks
+
+on: [push]
+
+jobs:
+  unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Dependencies
+        run: composer install --no-ansi --no-interaction --no-suggest --no-progress --prefer-dist --ignore-platform-reqs
+      - name: Execute tests (Unit) via PHPUnit
+        run: vendor/bin/phpunit.phar

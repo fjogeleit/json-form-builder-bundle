@@ -1,0 +1,20 @@
+form_text_element:
+    h1: 'Überschrift 1'
+    h2: 'Überschrift 2'
+    h3: 'Überschrift 3'
+    h4: 'Überschrift 4'
+    h5: 'Überschrift 5'
+    h6: 'Überschrift 6'
+    p: 'Paragraph'
+    q: 'Zitat'
+    div: 'Container'
+
+form_field_type:
+    input: 'Texteingabe'
+    text_area: 'Textbox'
+    select: 'Select'
+    multi_select: 'Select (Mehrfachauswahl)'
+    checkbox_group: 'Checkbox (Mehrfachauswahl)'
+    checkbox: 'Checkbox'
+    radio_button_group: 'Radio Button (Einfachauswahl)'
+    radio_button: 'Radio Button'

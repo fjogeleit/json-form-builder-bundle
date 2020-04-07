@@ -1,0 +1,55 @@
+{
+    "name": "fjogeleit/json-form-builder-bundle",
+    "description": "Symfony Integration for JsonFormBuilder",
+    "type": "library",
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "authors": [
+        {
+            "name": "Frank",
+            "email": "fj@move-elevator.de"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "path",
+            "url": "/Users/f.jogeleit/Workspace/Other/json-form-builder"
+        }
+    ],
+    "require": {
+        "php": ">=7.3",
+        "ext-json": "*",
+        "fjogeleit/json-form-builder": "dev-master",
+        "symfony/framework-bundle": "^4.4|^5.0",
+        "symfony/form": "^4.4|^5.0",
+        "ramsey/uuid": "^3.8|^4.0",
+        "doctrine/dbal": "^2.10"
+    },
+
+    "require-dev": {
+        "tm/tooly-composer-script": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "JsonFormBuilderBundle\\": ""
+        },
+        "exclude-from-classmap": [
+            "/Tests/"
+        ]
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "Tooly\\ScriptHandler::installPharTools"
+        ],
+        "post-update-cmd": [
+            "Tooly\\ScriptHandler::installPharTools"
+        ]
+    },
+    "extra": {
+        "tools": {
+            "phpunit": {
+                "url": "https://phar.phpunit.de/phpunit-8.5.2.phar"
+            }
+        }
+    }
+}
