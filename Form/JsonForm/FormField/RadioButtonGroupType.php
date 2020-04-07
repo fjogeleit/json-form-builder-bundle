@@ -9,10 +9,6 @@ use JsonFormBuilder\JsonForm\FormField\RadioButtonGroup;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataMapperInterface;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -22,12 +18,6 @@ class RadioButtonGroupType extends AbstractType implements DataMapperInterface
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('formFieldId', HiddenType::class, ['required' => true, 'translation_domain' => 'json_form_builder'])
-            ->add('position', NumberType::class, ['required' => true, 'empty_data' => $options['position'], 'translation_domain' => 'json_form_builder'])
-            ->add('label', TextType::class, ['required' => true, 'translation_domain' => 'json_form_builder'])
-            ->add('required', CheckboxType::class, ['translation_domain' => 'json_form_builder'])
-            ->add('visible', CheckboxType::class, ['translation_domain' => 'json_form_builder'])
-            ->add('options', OptionCollectionType::class, ['label' => false, 'translation_domain' => 'json_form_builder'])
             ->setDataMapper($this);
     }
 
@@ -42,8 +32,7 @@ class RadioButtonGroupType extends AbstractType implements DataMapperInterface
                     0,
                     OptionCollection::emptyList()
                 )
-            ])
-            ->setRequired('position');
+            ]);
     }
 
     /**
@@ -91,5 +80,10 @@ class RadioButtonGroupType extends AbstractType implements DataMapperInterface
             $forms['required']->getData(),
             $forms['visible']->getData()
         );
+    }
+
+    public function getParent(): string
+    {
+        return CollectionFormFieldType::class;
     }
 }

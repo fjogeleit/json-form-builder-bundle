@@ -27,6 +27,7 @@ class OptionCollectionType extends AbstractType implements DataMapperInterface
             ->setDefaults([
                 'data_class' => OptionCollection::class,
                 'entry_type' => OptionType::class,
+                'entry_options' => ['label' => false],
                 'label' => false,
                 'allow_add' => true,
                 'allow_delete' => true,

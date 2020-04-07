@@ -5,20 +5,19 @@ declare(strict_types=1);
 namespace JsonFormBuilderBundle\Form\JsonForm\FormField;
 
 use JsonFormBuilder\JsonForm\FormField\Option;
+use JsonFormBuilder\JsonForm\FormField\OptionCollection;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataMapperInterface;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class OptionType extends AbstractType implements DataMapperInterface
+class SimpleOptionCollectionType extends AbstractType implements DataMapperInterface
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('label', TextType::class, ['required' => true, 'translation_domain' => 'json_form_builder'])
-            ->add('value', TextType::class, ['required' => true, 'translation_domain' => 'json_form_builder'])
             ->setDataMapper($this);
     }
 
@@ -26,27 +25,33 @@ class OptionType extends AbstractType implements DataMapperInterface
     {
         $resolver
             ->setDefaults([
+                'data_class' => OptionCollection::class,
+                'entry_type' => SimpleOptionType::class,
+                'entry_options' => ['label' => false],
                 'label' => false,
-                'data_class' => Option::class,
-                'empty_data' => new Option('', '')
+                'allow_add' => true,
+                'allow_delete' => true,
+                'translation_domain' => 'json_form_builder',
+                'empty_data' => OptionCollection::emptyList()
             ]);
     }
 
     /**
-     * @param Option   $viewData
+     * @param array    $viewData
      * @param iterable $forms
      */
     public function mapDataToForms($viewData, $forms)
     {
-        if (false === $viewData instanceof Option) {
+        if (false === $viewData instanceof OptionCollection) {
             return;
         }
 
         /** @var FormInterface[] $forms */
         $forms = iterator_to_array($forms);
 
-        $forms['label']->setData($viewData->label());
-        $forms['value']->setData($viewData->value());
+        foreach ($forms as $key => $form) {
+            $form->setData($viewData[$key] ?? null);
+        }
     }
 
     /**
@@ -58,9 +63,15 @@ class OptionType extends AbstractType implements DataMapperInterface
         /** @var FormInterface[] $forms */
         $forms = iterator_to_array($forms);
 
-        $viewData = new Option(
-            $forms['label']->getData(),
-            $forms['value']->getData()
-        );
+        $viewData = OptionCollection::emptyList();
+
+        foreach ($forms as $form) {
+            $viewData = $viewData->add($form->getData());
+        }
+    }
+
+    public function getParent(): string
+    {
+        return CollectionType::class;
     }
 }

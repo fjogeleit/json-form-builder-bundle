@@ -12,12 +12,11 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class OptionType extends AbstractType implements DataMapperInterface
+class SimpleOptionType extends AbstractType implements DataMapperInterface
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('label', TextType::class, ['required' => true, 'translation_domain' => 'json_form_builder'])
             ->add('value', TextType::class, ['required' => true, 'translation_domain' => 'json_form_builder'])
             ->setDataMapper($this);
     }
@@ -45,7 +44,7 @@ class OptionType extends AbstractType implements DataMapperInterface
         /** @var FormInterface[] $forms */
         $forms = iterator_to_array($forms);
 
-        $forms['label']->setData($viewData->label());
+        $forms['label']->setData($viewData->value());
         $forms['value']->setData($viewData->value());
     }
 
@@ -59,7 +58,7 @@ class OptionType extends AbstractType implements DataMapperInterface
         $forms = iterator_to_array($forms);
 
         $viewData = new Option(
-            $forms['label']->getData(),
+            $forms['value']->getData(),
             $forms['value']->getData()
         );
     }

@@ -5,14 +5,17 @@ namespace JsonFormBuilderBundle\Form\JsonForm;
 use JsonFormBuilder\JsonForm;
 use JsonFormBuilder\JsonForm\FormField;
 use JsonFormBuilder\JsonForm\FormTextElement;
+use JsonFormBuilder\JsonForm\FormFieldCollection;
+use JsonFormBuilder\JsonForm\FormTextElementCollection;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\DataMapperInterface;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class PositionCollectionType extends AbstractType
+class PositionCollectionType extends AbstractType implements DataMapperInterface
 {
     /**
      * @param FormBuilderInterface $builder
@@ -22,11 +25,14 @@ class PositionCollectionType extends AbstractType
     {
         $builder
             ->add('formFields', CollectionType::class, [
-                'entry_type' => PositionType::class
+                'entry_type' => PositionType::class,
+                'empty_data' => FormFieldCollection::emptyList()
             ])
             ->add('formTextElements', CollectionType::class, [
-                'entry_type' => PositionType::class
-            ]);
+                'entry_type' => PositionType::class,
+                'empty_data' => FormTextElementCollection::emptyList()
+            ])
+            ->setDataMapper($this);
     }
 
     /**
@@ -77,5 +83,40 @@ class PositionCollectionType extends AbstractType
         $resolver->setDefaults([
             'data_class' => JsonForm::class
         ]);
+    }
+
+    /**
+     * @param JsonForm $viewData
+     * @param iterable $forms
+     */
+    public function mapDataToForms($viewData, $forms)
+    {
+        if (false === $viewData instanceof JsonForm) {
+            return;
+        }
+
+        /** @var FormInterface[] $forms */
+        $forms = iterator_to_array($forms);
+
+        $forms['formFields']->setData($viewData->formFields());
+        $forms['formTextElements']->setData($viewData->formTextElements());
+    }
+
+    /**
+     * @param iterable $forms
+     * @param JsonForm $viewData
+     */
+    public function mapFormsToData($forms, &$viewData)
+    {
+        /** @var FormInterface[] $forms */
+        $forms = iterator_to_array($forms);
+
+        foreach ($forms['formFields'] as $form) {
+            $viewData->replaceFormField($form->getData());
+        }
+
+        foreach ($forms['formTextElements'] as $form) {
+            $viewData->replaceFormTextElement($form->getData());
+        }
     }
 }

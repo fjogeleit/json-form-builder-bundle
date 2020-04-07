@@ -9,9 +9,7 @@ use JsonFormBuilder\JsonForm\FormField\InputType as InputValueType;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataMapperInterface;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -21,14 +19,15 @@ class InputType extends AbstractType implements DataMapperInterface
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $placeholderType = TextType::class;
+
+        if (false === $options['with_placeholder']) {
+            $placeholderType = HiddenType::class;
+        }
+
         $builder
-            ->add('formFieldId', HiddenType::class, ['required' => true, 'label' => false])
-            ->add('position', NumberType::class, ['required' => true, 'empty_data' => $options['position'], 'translation_domain' => 'json_form_builder'])
-            ->add('label', TextType::class, ['required' => true, 'translation_domain' => 'json_form_builder'])
             ->add('inputType', HiddenType::class, ['required' => true, 'empty_data' => $options['type'], 'label' => false])
-            ->add('required', CheckboxType::class, ['translation_domain' => 'json_form_builder'])
-            ->add('visible', CheckboxType::class, ['translation_domain' => 'json_form_builder'])
-            ->add('placeholder', TextType::class, ['translation_domain' => 'json_form_builder'])
+            ->add('placeholder', $placeholderType, ['translation_domain' => 'json_form_builder'])
             ->setDataMapper($this);
     }
 
@@ -36,6 +35,7 @@ class InputType extends AbstractType implements DataMapperInterface
     {
         $resolver
             ->setDefaults([
+                'with_placeholder' => true,
                 'data_class' => Input::class,
                 'type' => InputValueType::TEXT,
                 'empty_data' => new Input(
@@ -43,8 +43,7 @@ class InputType extends AbstractType implements DataMapperInterface
                     '',
                     0
                 )
-            ])
-            ->setRequired('position');
+            ]);
     }
 
     /**
@@ -92,5 +91,10 @@ class InputType extends AbstractType implements DataMapperInterface
             $forms['visible']->getData(),
             $forms['placeholder']->getData()
         );
+    }
+
+    public function getParent(): string
+    {
+        return FormFieldType::class;
     }
 }
