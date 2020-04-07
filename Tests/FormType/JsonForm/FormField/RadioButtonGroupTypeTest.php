@@ -23,7 +23,7 @@ class RadioButtonGroupTypeTest extends TypeTestCase
     public function test_submit_radio_button_type(): void
     {
         $uuid = Uuid::uuid4()->toString();
-        $form = $this->factory->create(RadioButtonGroupType::class, null, ['position' => 1]);
+        $form = $this->factory->create(RadioButtonGroupType::class, null, ['position' => 1, 'simple_options' => false]);
 
         $form->submit([
             'label' => 'RadioButtonGroup',

@@ -23,7 +23,7 @@ class CheckboxGroupTypeTest extends TypeTestCase
     public function test_submit_checkbox_group_type(): void
     {
         $uuid = Uuid::uuid4()->toString();
-        $form = $this->factory->create(CheckboxGroupType::class, null, ['position' => 1]);
+        $form = $this->factory->create(CheckboxGroupType::class, null, ['position' => 1, 'simple_options' => false]);
 
         $form->submit([
             'label' => 'CheckboxGroup',

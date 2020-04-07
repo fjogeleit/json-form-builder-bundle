@@ -23,7 +23,7 @@ class MultiSelectTypeTest extends TypeTestCase
     public function test_submit_select_type(): void
     {
         $uuid = Uuid::uuid4()->toString();
-        $form = $this->factory->create(MultiSelectType::class, null, ['position' => 1]);
+        $form = $this->factory->create(MultiSelectType::class, null, ['position' => 1, 'simple_options' => false]);
 
         $form->submit([
             'label' => 'MultiSelect',
