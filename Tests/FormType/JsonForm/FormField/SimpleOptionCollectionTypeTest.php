@@ -6,44 +6,44 @@ namespace JsonFormBuilderBundle\Tests\FormType\JsonForm\FormField;
 
 use JsonFormBuilder\JsonForm\FormField\Option;
 use JsonFormBuilder\JsonForm\FormField\OptionCollection;
-use JsonFormBuilderBundle\Form\JsonForm\OptionCollectionType;
+use JsonFormBuilderBundle\Form\JsonForm\SimpleOptionCollectionType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\Test\TypeTestCase;
 
-class OptionCollectionTypeTest extends TypeTestCase
+class SimpleOptionCollectionTypeTest extends TypeTestCase
 {
     public function test_create_option_collection_type(): void
     {
         $form = $this->factory->create(
-            OptionCollectionType::class,
+            SimpleOptionCollectionType::class,
             OptionCollection::emptyList()
-                ->add(new Option('Label A', 'A'))
-                ->add(new Option('Label B', 'B'))
+                ->add(new Option('Label A', 'Label A'))
+                ->add(new Option('Label B', 'Label A'))
         );
 
         $this->assertInstanceOf(FormInterface::class, $form);
         $this->assertInstanceOf(OptionCollection::class, $form->getData());
 
-        $this->assertFormIndex($form, 0, 'Label A', 'A');
-        $this->assertFormIndex($form, 1, 'Label B', 'B');
+        $this->assertFormIndex($form, 0, 'Label A', 'Label A');
+        $this->assertFormIndex($form, 1, 'Label B', 'Label A');
     }
 
     public function test_submit_option_collection_type(): void
     {
-        $form = $this->factory->create(OptionCollectionType::class, OptionCollection::emptyList()->add(new Option('Label P', 'P')));
+        $form = $this->factory->create(SimpleOptionCollectionType::class, OptionCollection::emptyList()->add(new Option('Label P', 'Label P')));
         $form->submit([
-            ['label' => 'Label A', 'value' => 'A'],
-            ['label' => 'Label B', 'value' => 'B'],
-            ['label' => 'Label C', 'value' => 'C'],
-            ['label' => 'Label D', 'value' => 'D'],
+            ['value' => 'Label A'],
+            ['value' => 'Label B'],
+            ['value' => 'Label C'],
+            ['value' => 'Label D'],
         ]);
 
         $this->assertTrue($form->isSynchronized());
 
-        $this->assertFormIndex($form, 0, 'Label A', 'A');
-        $this->assertFormIndex($form, 1, 'Label B', 'B');
-        $this->assertFormIndex($form, 2, 'Label C', 'C');
-        $this->assertFormIndex($form, 3, 'Label D', 'D');
+        $this->assertFormIndex($form, 0, 'Label A', 'Label A');
+        $this->assertFormIndex($form, 1, 'Label B', 'Label B');
+        $this->assertFormIndex($form, 2, 'Label C', 'Label C');
+        $this->assertFormIndex($form, 3, 'Label D', 'Label D');
     }
 
     public function assertFormIndex(FormInterface $form, int $index, string $label, string $value)

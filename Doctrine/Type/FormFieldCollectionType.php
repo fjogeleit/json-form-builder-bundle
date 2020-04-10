@@ -19,7 +19,7 @@ class FormFieldCollectionType extends JsonType
 
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
-        return FormFieldCollection::fromArray(json_decode($value, true));
+        return FormFieldCollection::fromArray(json_decode($value ?? '[]', true));
     }
 
     public function convertToDatabaseValue($value, AbstractPlatform $platform)

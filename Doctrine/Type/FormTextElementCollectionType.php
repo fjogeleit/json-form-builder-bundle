@@ -19,7 +19,7 @@ class FormTextElementCollectionType extends JsonType
 
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
-        return FormTextElementCollection::fromArray(json_decode($value, true));
+        return FormTextElementCollection::fromArray(json_decode($value ?? '[]', true));
     }
 
     public function convertToDatabaseValue($value, AbstractPlatform $platform)

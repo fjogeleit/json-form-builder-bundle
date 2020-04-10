@@ -11,7 +11,7 @@ form_text_element:
 
 form_field_type:
     input: 'Texteingabe'
-    text_area: 'Textbox'
+    textarea: 'Textbox'
     select: 'Select'
     multi_select: 'Select (Mehrfachauswahl)'
     checkbox_group: 'Checkbox (Mehrfachauswahl)'

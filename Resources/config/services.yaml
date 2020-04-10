@@ -23,3 +23,18 @@ services:
         arguments:
             - '@Symfony\Component\Form\FormFactoryInterface'
             - !tagged_iterator 'json_form_builder.form_text_element_type'
+
+    JsonFormBuilder\Service\FormFieldValueFactory\ArrayValueFactory:
+        tags:
+            - { name: 'json_form_builder.form_field_value_factory' }
+
+    JsonFormBuilder\Service\FormFieldValueFactory\BooleanValueFactory:
+        tags:
+            - { name: 'json_form_builder.form_field_value_factory' }
+
+    JsonFormBuilder\Service\FormFieldValueFactory\StringValueFactory:
+        tags:
+            - { name: 'json_form_builder.form_field_value_factory' }
+
+    JsonFormBuilder\Service\FormFieldValueCollectionFactory:
+        arguments: [!tagged_iterator 'json_form_builder.form_field_value_factory']

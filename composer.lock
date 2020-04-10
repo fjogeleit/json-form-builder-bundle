@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0eae7a70107c1fa3728cf387d993c741",
+    "content-hash": "fc39a317024f002ff65e659285c7bde2",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -366,10 +366,15 @@
         {
             "name": "fjogeleit/json-form-builder",
             "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fjogeleit/json-form-builder.git",
+                "reference": "044da46acb82422d482043c3482cf731446c41e4"
+            },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fjogeleit/json-form-builder/zipball/327047dbc19f93cc94db7f2898666d12e906a270",
-                "reference": "327047dbc19f93cc94db7f2898666d12e906a270",
+                "url": "https://api.github.com/repos/fjogeleit/json-form-builder/zipball/044da46acb82422d482043c3482cf731446c41e4",
+                "reference": "044da46acb82422d482043c3482cf731446c41e4",
                 "shasum": ""
             },
             "require": {
@@ -423,7 +428,7 @@
                 "source": "https://github.com/fjogeleit/json-form-builder/tree/master",
                 "issues": "https://github.com/fjogeleit/json-form-builder/issues"
             },
-            "time": "2020-04-07T22:01:06+00:00"
+            "time": "2020-04-10T16:03:10+00:00"
         },
         {
             "name": "marc-mabe/php-enum",

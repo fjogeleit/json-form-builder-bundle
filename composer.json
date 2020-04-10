@@ -12,8 +12,8 @@
     ],
     "repositories": [
         {
-            "type": "path",
-            "url": "/Users/f.jogeleit/Workspace/Other/json-form-builder"
+            "type": "vcs",
+            "url": "https://github.com/fjogeleit/json-form-builder"
         }
     ],
     "require": {
