@@ -7,6 +7,7 @@ namespace JsonFormBuilderBundle\Form\JsonForm\FormField;
 use JsonFormBuilder\JsonForm\FormField\CheckboxGroup;
 use JsonFormBuilder\JsonForm\FormField\Option;
 use JsonFormBuilder\JsonForm\FormField\OptionCollection;
+use JsonFormBuilderBundle\Form\JsonForm\FormFieldTypeInterface;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataMapperInterface;
@@ -14,7 +15,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CheckboxGroupType extends AbstractType implements DataMapperInterface
+class CheckboxGroupType extends AbstractType implements FormFieldTypeInterface, DataMapperInterface
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -87,5 +88,10 @@ class CheckboxGroupType extends AbstractType implements DataMapperInterface
     public function getParent(): string
     {
         return CollectionFormFieldType::class;
+    }
+
+    public function getFormField(): string
+    {
+        return CheckboxGroup::class;
     }
 }

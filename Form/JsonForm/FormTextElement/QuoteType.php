@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace JsonFormBuilderBundle\Form\JsonForm\FormTextElement;
 
 use JsonFormBuilder\JsonForm\FormTextElement\Quote;
+use JsonFormBuilderBundle\Form\JsonForm\FormTextElementType;
+use JsonFormBuilderBundle\Form\JsonForm\FormTextElementTypeInterface;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataMapperInterface;
@@ -13,7 +15,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class QuoteType extends AbstractType implements DataMapperInterface
+class QuoteType extends AbstractType implements FormTextElementTypeInterface, DataMapperInterface
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -79,5 +81,10 @@ class QuoteType extends AbstractType implements DataMapperInterface
     public function getParent()
     {
         return FormTextElementType::class;
+    }
+
+    public function getFormTextElement(): string
+    {
+        return Quote::class;
     }
 }

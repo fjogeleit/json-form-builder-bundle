@@ -18,3 +18,13 @@ form_field_type:
     checkbox: 'Checkbox'
     radio_button_group: 'Radio Button (Einfachauswahl)'
     radio_button: 'Radio Button'
+
+simple_option:
+    value: 'Option'
+
+form_label:
+    label: 'Name'
+    visible: 'Sichtbar'
+    required: 'Pflichtfeld'
+    position: 'Position'
+    text: Text

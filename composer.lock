@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fc39a317024f002ff65e659285c7bde2",
+    "content-hash": "0eae7a70107c1fa3728cf387d993c741",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -366,11 +366,6 @@
         {
             "name": "fjogeleit/json-form-builder",
             "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/fjogeleit/json-form-builder.git",
-                "reference": "327047dbc19f93cc94db7f2898666d12e906a270"
-            },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/fjogeleit/json-form-builder/zipball/327047dbc19f93cc94db7f2898666d12e906a270",

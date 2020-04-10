@@ -6,6 +6,8 @@ namespace JsonFormBuilderBundle\Form\JsonForm\FormField;
 
 use JsonFormBuilder\JsonForm\FormField\Input;
 use JsonFormBuilder\JsonForm\FormField\InputType as InputValueType;
+use JsonFormBuilderBundle\Form\JsonForm\FormFieldType;
+use JsonFormBuilderBundle\Form\JsonForm\FormFieldTypeInterface;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataMapperInterface;
@@ -15,7 +17,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class InputType extends AbstractType implements DataMapperInterface
+class InputType extends AbstractType implements FormFieldTypeInterface, DataMapperInterface
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -96,5 +98,10 @@ class InputType extends AbstractType implements DataMapperInterface
     public function getParent(): string
     {
         return FormFieldType::class;
+    }
+
+    public function getFormField(): string
+    {
+        return Input::class;
     }
 }

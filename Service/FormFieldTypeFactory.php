@@ -4,59 +4,47 @@ declare(strict_types=1);
 
 namespace JsonFormBuilderBundle\Service;
 
-use JsonFormBuilder\JsonForm\FormField;
-use JsonFormBuilder\JsonForm\FormField\Checkbox;
-use JsonFormBuilder\JsonForm\FormField\CheckboxGroup;
-use JsonFormBuilder\JsonForm\FormField\Input;
-use JsonFormBuilder\JsonForm\FormField\MultiSelect;
-use JsonFormBuilder\JsonForm\FormField\RadioButton;
-use JsonFormBuilder\JsonForm\FormField\RadioButtonGroup;
-use JsonFormBuilder\JsonForm\FormField\Select;
-use JsonFormBuilder\JsonForm\FormField\TextArea;
+use JsonFormBuilder\JsonForm\FormFieldInterface;
 use JsonFormBuilderBundle\Excepion\NoFormTypeFound;
-use JsonFormBuilderBundle\Form\JsonForm\FormField\CheckboxGroupType;
-use JsonFormBuilderBundle\Form\JsonForm\FormField\CheckboxType;
-use JsonFormBuilderBundle\Form\JsonForm\FormField\InputType;
-use JsonFormBuilderBundle\Form\JsonForm\FormField\MultiSelectType;
-use JsonFormBuilderBundle\Form\JsonForm\FormField\RadioButtonGroupType;
-use JsonFormBuilderBundle\Form\JsonForm\FormField\RadioButtonType;
-use JsonFormBuilderBundle\Form\JsonForm\FormField\SelectType;
-use JsonFormBuilderBundle\Form\JsonForm\FormField\TextAreaType;
+use JsonFormBuilderBundle\Form\JsonForm\FormFieldTypeInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 
 class FormFieldTypeFactory
 {
-    private const MAP = [
-        Checkbox::class => CheckboxType::class,
-        CheckboxGroup::class => CheckboxGroupType::class,
-        RadioButton::class => RadioButtonType::class,
-        RadioButtonGroup::class => RadioButtonGroupType::class,
-        Select::class => SelectType::class,
-        MultiSelect::class => MultiSelectType::class,
-        Input::class => InputType::class,
-        TextArea::class => TextAreaType::class,
-    ];
+    /**
+     * @var array|string[]
+     */
+    private $formTypes = [];
 
     /**
      * @var FormFactoryInterface
      */
     private $factory;
 
-    public function __construct(FormFactoryInterface $factory)
+    public function __construct(FormFactoryInterface $factory, iterable $formTypes)
     {
         $this->factory = $factory;
+
+        /** @var FormFieldTypeInterface $formType */
+        foreach ($formTypes as $formType) {
+            if (false === $formType instanceof FormFieldTypeInterface) {
+                continue;
+            }
+
+            $this->formTypes[$formType->getFormField()] = get_class($formType);
+        }
     }
 
-    public function createByFormField(FormField $formField, array $options): FormInterface
+    public function createByFormField(FormFieldInterface $formField, array $options): FormInterface
     {
         $class = get_class($formField);
 
-        if (false === array_key_exists($class, self::MAP)) {
+        if (false === array_key_exists($class, $this->formTypes)) {
             throw  NoFormTypeFound::forFormField($class);
         }
 
-        $formType = self::MAP[$class];
+        $formType = $this->formTypes[$class];
 
         return $this->factory->create($formType, $formField, array_merge([
             'position' => $formField->position()
@@ -65,11 +53,11 @@ class FormFieldTypeFactory
 
     public function createByFormFieldClass(string $formField, array $options): FormInterface
     {
-        if (false === array_key_exists($formField, self::MAP)) {
+        if (false === array_key_exists($formField, $this->formTypes)) {
             throw  NoFormTypeFound::forFormField($formField);
         }
 
-        $formType = self::MAP[$formField];
+        $formType = $this->formTypes[$formField];
 
         return $this->factory->create($formType, null, $options);
     }

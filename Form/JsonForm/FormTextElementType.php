@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace JsonFormBuilderBundle\Form\JsonForm\FormTextElement;
+namespace JsonFormBuilderBundle\Form\JsonForm;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -16,8 +16,16 @@ class FormTextElementType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('formTextElementId', HiddenType::class, ['required' => true, 'translation_domain' => 'json_form_builder'])
-            ->add('text', TextType::class, ['required' => true, 'translation_domain' => 'json_form_builder']);
+            ->add('formTextElementId', HiddenType::class, [
+                'label' => false,
+                'required' => true,
+                'translation_domain' => 'json_form_builder'
+            ])
+            ->add('text', TextType::class, [
+                'label' => 'form_label.text',
+                'required' => true,
+                'translation_domain' => 'json_form_builder'
+            ]);
 
         $positionType = NumberType::class;
 

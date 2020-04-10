@@ -4,5 +4,22 @@ services:
         autoconfigure: true
         public: false
 
-    JsonFormBuilderBundle\Service\FormFieldTypeFactory: ~
-    JsonFormBuilderBundle\Service\FormTextElementTypeFactory: ~
+    JsonFormBuilderBundle\Form\JsonForm\FormField\:
+        resource: '../../Form/JsonForm/FormField'
+        tags:
+            - { name: 'json_form_builder.form_field_type' }
+
+    JsonFormBuilderBundle\Form\JsonForm\FormTextElement\:
+        resource: '../../Form/JsonForm/FormTextElement'
+        tags:
+            - { name: 'json_form_builder.form_text_element_type' }
+
+    JsonFormBuilderBundle\Service\FormFieldTypeFactory:
+        arguments:
+            - '@Symfony\Component\Form\FormFactoryInterface'
+            - !tagged_iterator 'json_form_builder.form_field_type'
+
+    JsonFormBuilderBundle\Service\FormTextElementTypeFactory:
+        arguments:
+            - '@Symfony\Component\Form\FormFactoryInterface'
+            - !tagged_iterator 'json_form_builder.form_text_element_type'

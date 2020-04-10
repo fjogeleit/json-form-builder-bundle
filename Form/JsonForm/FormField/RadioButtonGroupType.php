@@ -6,6 +6,7 @@ namespace JsonFormBuilderBundle\Form\JsonForm\FormField;
 
 use JsonFormBuilder\JsonForm\FormField\OptionCollection;
 use JsonFormBuilder\JsonForm\FormField\RadioButtonGroup;
+use JsonFormBuilderBundle\Form\JsonForm\FormFieldTypeInterface;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataMapperInterface;
@@ -13,7 +14,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class RadioButtonGroupType extends AbstractType implements DataMapperInterface
+class RadioButtonGroupType extends AbstractType implements FormFieldTypeInterface, DataMapperInterface
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -85,5 +86,10 @@ class RadioButtonGroupType extends AbstractType implements DataMapperInterface
     public function getParent(): string
     {
         return CollectionFormFieldType::class;
+    }
+
+    public function getFormField(): string
+    {
+        return RadioButtonGroup::class;
     }
 }

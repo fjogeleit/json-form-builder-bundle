@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace JsonFormBuilderBundle\Form\JsonForm\FormField;
 
+use JsonFormBuilderBundle\Form\JsonForm\FormFieldType;
+use JsonFormBuilderBundle\Form\JsonForm\OptionCollectionType;
+use JsonFormBuilderBundle\Form\JsonForm\SimpleOptionCollectionType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
