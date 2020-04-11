@@ -19,6 +19,11 @@ form_field_type:
     radio_button_group: 'Radio Button (Einfachauswahl)'
     radio_button: 'Radio Button'
 
+form_field_value:
+    boolean:
+        true: 'Ja'
+        false: 'Nein'
+
 simple_option:
     value: 'Option'
 

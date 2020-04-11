@@ -26,15 +26,17 @@ services:
 
     JsonFormBuilder\Service\FormFieldValueFactory\ArrayValueFactory:
         tags:
-            - { name: 'json_form_builder.form_field_value_factory' }
+            - { name: 'json_form_builder.primitive_form_field_value_factory' }
 
     JsonFormBuilder\Service\FormFieldValueFactory\BooleanValueFactory:
         tags:
-            - { name: 'json_form_builder.form_field_value_factory' }
+            - { name: 'json_form_builder.primitive_form_field_value_factory' }
 
     JsonFormBuilder\Service\FormFieldValueFactory\StringValueFactory:
         tags:
-            - { name: 'json_form_builder.form_field_value_factory' }
+            - { name: 'json_form_builder.primitive_form_field_value_factory' }
 
     JsonFormBuilder\Service\FormFieldValueCollectionFactory:
-        arguments: [!tagged_iterator 'json_form_builder.form_field_value_factory']
+        arguments:
+            - !tagged_iterator 'json_form_builder.form_field_value_factory'
+            - !tagged_iterator 'json_form_builder.primitive_form_field_value_factory'
