@@ -20,9 +20,8 @@ form_field_type:
     radio_button: 'Radio Button'
 
 form_field_value:
-    boolean:
-        true: 'Ja'
-        false: 'Nein'
+    boolean.true: 'Ja'
+    boolean.false: 'Nein'
 
 simple_option:
     value: 'Option'
