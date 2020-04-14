@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace JsonFormBuilderBundle\Form\JsonForm\FormField;
 
+use JsonFormBuilder\JsonForm\FormField\Option;
 use JsonFormBuilder\JsonForm\FormField\OptionCollection;
 use JsonFormBuilder\JsonForm\FormField\Select;
 use JsonFormBuilderBundle\Form\JsonForm\FormFieldTypeInterface;
@@ -47,6 +48,7 @@ class SelectType extends AbstractType implements FormFieldTypeInterface, DataMap
 
         if (false === $viewData instanceof Select) {
             $forms['formFieldId']->setData(Uuid::uuid4()->toString());
+            $forms['options']->setData(OptionCollection::emptyList()->add(new Option('', '')));
 
             return;
         }

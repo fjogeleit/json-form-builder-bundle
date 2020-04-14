@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace JsonFormBuilderBundle\Form\JsonForm\FormField;
 
 use JsonFormBuilder\JsonForm\FormField\MultiSelect;
+use JsonFormBuilder\JsonForm\FormField\Option;
 use JsonFormBuilder\JsonForm\FormField\OptionCollection;
 use JsonFormBuilderBundle\Form\JsonForm\FormFieldTypeInterface;
 use Ramsey\Uuid\Uuid;
@@ -47,6 +48,7 @@ class MultiSelectType extends AbstractType implements FormFieldTypeInterface, Da
 
         if (false === $viewData instanceof MultiSelect) {
             $forms['formFieldId']->setData(Uuid::uuid4()->toString());
+            $forms['options']->setData(OptionCollection::emptyList()->add(new Option('', '')));
 
             return;
         }
