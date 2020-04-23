@@ -369,12 +369,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fjogeleit/json-form-builder.git",
-                "reference": "044da46acb82422d482043c3482cf731446c41e4"
+                "reference": "df0c6d81c052f943b64ad6831360ef91922fed49"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fjogeleit/json-form-builder/zipball/044da46acb82422d482043c3482cf731446c41e4",
-                "reference": "044da46acb82422d482043c3482cf731446c41e4",
+                "url": "https://api.github.com/repos/fjogeleit/json-form-builder/zipball/df0c6d81c052f943b64ad6831360ef91922fed49",
+                "reference": "df0c6d81c052f943b64ad6831360ef91922fed49",
                 "shasum": ""
             },
             "require": {
@@ -428,7 +428,7 @@
                 "source": "https://github.com/fjogeleit/json-form-builder/tree/master",
                 "issues": "https://github.com/fjogeleit/json-form-builder/issues"
             },
-            "time": "2020-04-10T16:03:10+00:00"
+            "time": "2020-04-12T12:09:14+00:00"
         },
         {
             "name": "marc-mabe/php-enum",
@@ -2774,5 +2774,6 @@
         "php": ">=7.3",
         "ext-json": "*"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "1.1.0"
 }
