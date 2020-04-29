@@ -47,6 +47,7 @@ class RadioButtonType extends AbstractType implements FormFieldTypeInterface, Da
 
         if (false === $viewData instanceof RadioButton) {
             $forms['formFieldId']->setData(Uuid::uuid4()->toString());
+            $forms['visible']->setData(true);
 
             return;
         }

@@ -59,6 +59,7 @@ class InputType extends AbstractType implements FormFieldTypeInterface, DataMapp
 
         if (false === $viewData instanceof Input) {
             $forms['formFieldId']->setData(Uuid::uuid4()->toString());
+            $forms['visible']->setData(true);
 
             return;
         }

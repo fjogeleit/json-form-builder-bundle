@@ -49,6 +49,7 @@ class SelectType extends AbstractType implements FormFieldTypeInterface, DataMap
         if (false === $viewData instanceof Select) {
             $forms['formFieldId']->setData(Uuid::uuid4()->toString());
             $forms['options']->setData(OptionCollection::emptyList()->add(new Option('', '')));
+            $forms['visible']->setData(true);
 
             return;
         }

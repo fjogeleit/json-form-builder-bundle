@@ -43,6 +43,7 @@ class CheckboxType extends AbstractType implements FormFieldTypeInterface, DataM
 
         if (false === $viewData instanceof Checkbox) {
             $forms['formFieldId']->setData(Uuid::uuid4()->toString());
+            $forms['visible']->setData(true);
 
             return;
         }

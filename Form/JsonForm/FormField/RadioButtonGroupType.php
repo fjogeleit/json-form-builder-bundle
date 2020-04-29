@@ -49,6 +49,7 @@ class RadioButtonGroupType extends AbstractType implements FormFieldTypeInterfac
         if (false === $viewData instanceof RadioButtonGroup) {
             $forms['formFieldId']->setData(Uuid::uuid4()->toString());
             $forms['options']->setData(OptionCollection::emptyList()->add(new Option('', '')));
+            $forms['visible']->setData(true);
 
             return;
         }

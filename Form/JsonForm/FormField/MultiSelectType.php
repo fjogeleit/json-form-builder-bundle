@@ -49,6 +49,7 @@ class MultiSelectType extends AbstractType implements FormFieldTypeInterface, Da
         if (false === $viewData instanceof MultiSelect) {
             $forms['formFieldId']->setData(Uuid::uuid4()->toString());
             $forms['options']->setData(OptionCollection::emptyList()->add(new Option('', '')));
+            $forms['visible']->setData(true);
 
             return;
         }

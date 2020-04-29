@@ -50,6 +50,7 @@ class CheckboxGroupType extends AbstractType implements FormFieldTypeInterface, 
         if (false === $viewData instanceof CheckboxGroup) {
             $forms['formFieldId']->setData(Uuid::uuid4()->toString());
             $forms['options']->setData(OptionCollection::emptyList()->add(new Option('', '')));
+            $forms['visible']->setData(true);
 
             return;
         }
