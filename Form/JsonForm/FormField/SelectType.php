@@ -57,6 +57,7 @@ class SelectType extends AbstractType implements FormFieldTypeInterface, DataMap
         $forms['label']->setData($viewData->label());
         $forms['required']->setData($viewData->required());
         $forms['visible']->setData($viewData->visible());
+        $forms['options']->setData($viewData->options());
     }
 
     /**
